@@ -5,8 +5,12 @@
 </section>
 <section class="list_section">
  <div class="menu_container">
-   <button class="all_btn"></button>
-   <button class="faves_btn"></button>
+   <button class="menu_btn menu_btn_active" id="btn_all" (click)="toggleList()"  >
+     <p class="menu_text">All</p>
+   </button>
+   <button class="menu_btn" id="btn_faves" (click)="toggleList()" >
+     <p class="menu_text">My faves</p>
+   </button>
  </div>
 </section>
 <section class="pagination_section"></section>
