@@ -1,0 +1,10 @@
+section.header_section {
+  height: 114px;
+  display: flex;
+  align-items: center;
+  background-image: linear-gradient(180deg, #ececec,#ffffff);
+}
+
+.banner_img_container {
+  margin-left: 150px;
+}
