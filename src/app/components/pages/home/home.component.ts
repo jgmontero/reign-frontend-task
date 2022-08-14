@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NewsServicesService} from "../../../services/news-services.service";
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ export class HomeComponent implements OnInit {
 
   dd_selected: any = {};
   filter_exist: boolean = false;
-  constructor() { }
+  constructor( private newsServices : NewsServicesService) { }
 
   ngOnInit(): void {
     if(window.localStorage.getItem('filter') !==null){
@@ -25,6 +26,9 @@ export class HomeComponent implements OnInit {
         name:'Select your news'
       };
     }
+    this.newsServices.getNews('angular',0).subscribe(res => {
+      console.log(res.hits);
+    });
   }
   toggleList():void{
     let btn_all = document.getElementById('btn_all');

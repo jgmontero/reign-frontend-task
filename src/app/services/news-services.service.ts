@@ -13,8 +13,8 @@ export class NewsServicesService {
   constructor(private client: HttpClient) {
   }
 
-  getNews(languaje: string, page: number): Observable<any> {
-    const url = 'https://hn.algolia.com/api/v1/search_by_date?query=' + languaje + '&page=' + page;
+  getNews(language: string, page: number): Observable<any> {
+    const url = 'https://hn.algolia.com/api/v1/search_by_date?query=' + language + '&page=' + page;
     return this.client.get<any[]>(url, this.httpOptions);
   }
 }
