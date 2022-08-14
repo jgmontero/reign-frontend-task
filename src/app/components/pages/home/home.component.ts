@@ -6,11 +6,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  language_list: any[] = [];
+
+  dd_selected: any = {};
+  filter_exist: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
-
+    if(window.localStorage.getItem('filter') !==null){
+      this.filter_exist = true;
+      let str = JSON.parse(<string>localStorage.getItem("filter"));
+      this.dd_selected ={
+        icon:str.icon,
+        name:str.name
+      };
+    }else{
+      this.dd_selected ={
+        icon:'"./assets/icons/none-ico.jpg"',
+        name:'Select your news'
+      };
+    }
   }
   toggleList():void{
     let btn_all = document.getElementById('btn_all');
@@ -33,4 +47,39 @@ export class HomeComponent implements OnInit {
 
   }
 
+  toggleDropDown(event:any):void{
+    let dd = document.getElementById('dd_list');
+
+    // @ts-ignore
+    if (dd.style.display == 'none'){
+      // @ts-ignore
+      dd.style.display = 'block';
+      // @ts-ignore
+      event.target.classList.add('menu_btn_active');
+    }
+    else{
+      // @ts-ignore
+      dd.style.display = 'none';
+      // @ts-ignore
+      event.target.classList.remove('menu_btn_active')
+    }
+
+  }
+
+  selectOption(event:any):void{
+
+    let select = event.target.value.toLowerCase();
+    let name = event.target.value
+    this.dd_selected = {
+      icon:'./assets/icons/'+ select +'-ico.jpg',
+      name: name ,
+    };
+      localStorage.setItem('filter',JSON.stringify(this.dd_selected));
+     let box = document.getElementsByClassName('menu_btn_active');
+     //console.log(box[1]);
+    box[1].classList.remove('menu_btn_active');
+    let dd = document.getElementById('dd_list');
+    // @ts-ignore
+    dd.style.display = 'none';
+  }
 }

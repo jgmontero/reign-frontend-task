@@ -14,35 +14,29 @@
  </div>
   <div class="selector_container">
     <div class="front_selector">
-      <div class="front_selector_bar_button">
-        <img class="front_icon" src="./assets/icons/angular-ico.jpg"/>
-        <button class="bar_visible_button">Select your news</button>
+
+      <button *ngIf="filter_exist==false" (click)="toggleDropDown($event)" class="front_selector_bar_button">Select your news</button>
+
+      <div *ngIf="filter_exist==true"  (click)="toggleDropDown($event)"  class="front_selector_bar_button_container">
+        <img class="front_icon" src="{{dd_selected.icon}}"/>
+        <button class="front_selector_option_button">{{dd_selected.name}}</button>
       </div>
-      <ul class="front_selector_box">
+
+      <ul class="front_selector_box" id="dd_list" style="display: none;">
         <li class="front_selector_option">
           <img class="front_icon" src="./assets/icons/angular-ico.jpg"/>
-          <button class="front_selector_option_button">Angular</button>
+          <button (click)="selectOption($event)" class="front_selector_option_button" value="Angular">Angular</button>
         </li>
         <li class="front_selector_option">
           <img class="front_icon" src="./assets/icons/reactjs-ico.jpg"/>
-          <button class="front_selector_option_button">ReactJs</button>
+          <button (click)="selectOption($event)" class="front_selector_option_button" value="Reactjs">ReactJs</button>
         </li>
         <li class="front_selector_option">
           <img class="front_icon" src="./assets/icons/vuejs-ico.jpg"/>
-          <button class="front_selector_option_button">VueJs</button>
+          <button (click)="selectOption($event)" class="front_selector_option_button" value="Vuejs">VueJs</button>
         </li>
       </ul>
-
-
-
-
     </div>
-    <!--<select class="front_selector">
-      <option class="front_selector_option" value="angular">
-        <img class="front_icon" src="./assets/icons/angular-ico.jpg"/>
-        Angular
-      </option>
-    </select> -->
   </div>
 </section>
 <section class="pagination_section"></section>
