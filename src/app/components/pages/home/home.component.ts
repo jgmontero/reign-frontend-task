@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  language_list: any[] = [];
   constructor() { }
 
   ngOnInit(): void {
+
   }
   toggleList():void{
     let btn_all = document.getElementById('btn_all');
@@ -31,4 +32,5 @@ export class HomeComponent implements OnInit {
     }
 
   }
+
 }
