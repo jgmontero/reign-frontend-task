@@ -12,7 +12,7 @@
      <p class="menu_text">My faves</p>
    </button>
  </div>
-  <div class="selector_container">
+  <div *ngIf="visibility=='all'" class="selector_container">
     <div class="front_selector">
 
       <button *ngIf="filter_exist==false" (click)="toggleDropDown($event)" class="front_selector_bar_button">Select your news</button>
@@ -40,7 +40,7 @@
   </div>
   <div class="list_container">
 
-    <div class="list_all">
+    <div *ngIf="visibility=='all'" class="list_all">
       <div class="list_element_container">
         <div class="list_element" *ngFor="let item of news_list">
           <div  class="info_container">
@@ -64,8 +64,28 @@
       </div>
 
     </div>
-    <div class="list_my_faves">
+    <div *ngIf="visibility=='faves'" class="list_my_faves">
+      <div class="list_element_container">
+        <div class="list_element" *ngFor="let item of news_faves">
+          <div  class="info_container">
+            <div class="date_container">
+              <img class="date_icon" src="./assets/icons/date-ico.svg">
+              <span class="date">{{item.time}} by {{item.author}}</span>
+            </div>
+            <div class="text_info_container">
+              <p class="text_info">{{item.info}}</p>
+            </div>
+          </div>
+          <div class="reaction_container">
+            <div class="reaction_img_container">
+              <button (click)="reactToNews(item)" class="reaction_button">
+                <img class="reaction_img" src="{{item.reaction}}">
+              </button>
+            </div>
+          </div>
+        </div>
 
+      </div>
     </div>
   </div>
 </section>

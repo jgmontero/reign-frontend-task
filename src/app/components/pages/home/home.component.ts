@@ -92,7 +92,6 @@ export class HomeComponent implements OnInit {
     };
     localStorage.setItem('filter', JSON.stringify(this.dd_selected));
     let box = document.getElementsByClassName('menu_btn_active');
-    //console.log(box[1]);
     box[1].classList.remove('menu_btn_active');
     let dd = document.getElementById('dd_list');
     // @ts-ignore
@@ -106,7 +105,6 @@ export class HomeComponent implements OnInit {
     this.news_list = [];
     let news = await this.newsServices.getNews(language, page);
 
-    //console.log(JSON.parse(<string>localStorage.getItem("my_faves")));
     news.hits.forEach((item: any) => {
       let time = this.xtimeAgo(new Date(item.created_at));
       let author = item.author;
@@ -130,7 +128,6 @@ export class HomeComponent implements OnInit {
         reaction: reaction,
       })
     });
-    //console.log(this.news_list);
   }
 
   xtimeAgo(pastDate: Date): string {
@@ -170,13 +167,12 @@ export class HomeComponent implements OnInit {
     item.reaction = "./assets/icons/reaction-active-ico.svg";
     this.news_faves.push(item);
     localStorage.setItem('filter', JSON.stringify(this.news_faves));
-    //console.log(this.news_faves);
     } else {
     this.news_list[index].reaction = "./assets/icons/reaction-inactive-ico.svg";
     this.news_faves.splice(this.isFaves(item.id),1);
     localStorage.setItem('filter', JSON.stringify(this.news_faves));
     }
-    console.log(this.news_faves);
+
   }
 
   isFaves(id: string): number{
