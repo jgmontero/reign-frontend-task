@@ -20,9 +20,10 @@ button.menu_btn {
   height: fit-content;
   border-radius: 2px;
   border: solid 1px #d6d6d6;
+  transition: linear .3s;
 }
 button.menu_btn:hover{
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 p.menu_text {
@@ -36,10 +37,11 @@ p.menu_text {
 .menu_btn_active{
   border: solid 1px #1797ff !important;
   color: #1797ff;
+  transition: linear .3s;
 }
 
 .menu_btn_active:hover{
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .selector_container {
@@ -57,7 +59,7 @@ button.front_selector_bar_button {
   background-color: #fff;
 }
 ul.front_selector_box {
-  width: 215px;
+  width: 22%;
   height: fit-content;
   margin: 0 0 0 1px;
   padding: 15px 15px 12px 10px;
@@ -65,15 +67,17 @@ ul.front_selector_box {
   background-color: #fff;
   position:absolute;
   z-index:1;
+  transition: visibility .3s;
 }
 
 li.front_selector_option {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  transition: linear .3s;
 }
 li.front_selector_option:hover{
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 img.front_icon {
@@ -99,7 +103,7 @@ button.front_selector_option_button {
   text-align: left;
 }
 .front_selector_bar_button_container {
-  width: 240px;
+  width: 25%;
   height: 32px;
   padding: 5px 12px 5px 12px;
   border-radius: 4px;
@@ -107,10 +111,11 @@ button.front_selector_option_button {
   background-color: #fff;
   display: flex;
   align-items: center;
+  transition: linear .3s;
 }
 
 .front_selector_bar_button_container:hover{
-  opacity: 0.8;
+  opacity: 0.7;
   border: solid 1px #1797ff !important;
   color: #1797ff !important;
 }
@@ -131,6 +136,7 @@ button.front_selector_option_button {
   justify-content: space-between;
   flex: 45%;
   margin: 2%;
+  transition: opacity linear .5s;
 }
 .list_element:hover{
   opacity: 0.7;
@@ -204,4 +210,5 @@ a {
 button.reaction_button {
   border: none;
 }
+
 

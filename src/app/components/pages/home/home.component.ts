@@ -42,16 +42,16 @@ export class HomeComponent implements OnInit {
     // @ts-ignore
     if (btn_all.classList.contains('menu_btn_active')) {
       // @ts-ignore
-      btn_all.classList.remove('menu_btn_active');
+      btn_all.classList.toggle('menu_btn_active');
       // @ts-ignore
-      btn_faves.classList.add('menu_btn_active');
+      btn_faves.classList.toggle('menu_btn_active');
       this.visibility = 'faves';
 
     } else {
       // @ts-ignore
-      btn_faves.classList.remove('menu_btn_active');
+      btn_faves.classList.toggle('menu_btn_active');
       // @ts-ignore
-      btn_all.classList.add('menu_btn_active');
+      btn_all.classList.toggle('menu_btn_active');
       this.visibility = 'all';
     }
 
@@ -65,12 +65,12 @@ export class HomeComponent implements OnInit {
       // @ts-ignore
       dd.style.display = 'block';
       // @ts-ignore
-      event.target.classList.add('menu_btn_active');
+      event.target.classList.toggle('menu_btn_active');
     } else {
       // @ts-ignore
       dd.style.display = 'none';
       // @ts-ignore
-      event.target.classList.remove('menu_btn_active')
+      event.target.classList.toggle('menu_btn_active')
     }
 
   }
