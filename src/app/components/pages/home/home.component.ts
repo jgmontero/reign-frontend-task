@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   news_list: any[] = [];
   news_faves: any[] = [];
   news_pageAmount: number = 1;
+  actual_page: number = 0;
 
   constructor(private newsServices: NewsServicesService) {
   }
@@ -33,8 +34,9 @@ export class HomeComponent implements OnInit {
     } else {
       this.news_faves = [];
     }
+    this.actual_page = 0;
     this.getPages();
-    this.getNews(this.dd_selected.name, 0);
+    this.getNews(this.dd_selected.name, this.actual_page);
   }
 
   toggleList(): void {
@@ -114,16 +116,18 @@ export class HomeComponent implements OnInit {
       } else {
         reaction = "./assets/icons/reaction-inactive-ico.svg";
       }
+      if(item.author !==null &&  item.story_title !==null && item.story_url !==null && item.created_at!==null){
+        this.news_list.push({
+          time: time,
+          author: author,
+          info: info,
+          date_sort: date_sort,
+          id: item.created_at,
+          reaction: reaction,
+          story_url: story_url,
+        })
+      }
 
-      this.news_list.push({
-        time: time,
-        author: author,
-        info: info,
-        date_sort: date_sort,
-        id: item.created_at,
-        reaction: reaction,
-        story_url: story_url,
-      })
     });
   }
 
@@ -185,5 +189,27 @@ export class HomeComponent implements OnInit {
   async getPages(){
     let pages = await this.newsServices.getNewsPageAmount(this.dd_selected.name);
     this.news_pageAmount = pages.nbPages;
+  }
+
+  previousPage(): void{
+    if(this.actual_page > 0 ){
+      this.actual_page -=1;
+    }
+    this.getNews(this.dd_selected.name,this.actual_page);
+    console.log(this.actual_page);
+  }
+
+  nextPage(): void{
+    if(this.actual_page < this.news_pageAmount - 1 ){
+      this.actual_page += 1;
+    }
+    this.getNews(this.dd_selected.name,this.actual_page);
+    console.log(this.actual_page)
+  }
+
+  gotoPage(page: number):void{
+    this.actual_page = page - 1;
+    this.getNews(this.dd_selected.name,this.actual_page);
+    console.log(this.actual_page)
   }
 }

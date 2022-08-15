@@ -211,4 +211,8 @@ button.reaction_button {
   border: none;
 }
 
+.pagination_container {
+  display: flex;
+  justify-content: center;
+}
 
