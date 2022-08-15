@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +12,9 @@ export class NewsServicesService {
   constructor(private client: HttpClient) {
   }
 
-  getNews(language: string, page: number): Observable<any> {
+  async getNews(language: string, page: number): Promise<any> {
     const url = 'https://hn.algolia.com/api/v1/search_by_date?query=' + language + '&page=' + page;
-    return this.client.get<any[]>(url, this.httpOptions);
+    return this.client.get<any[]>(url, this.httpOptions).toPromise().catch((err) => {
+    });
   }
 }

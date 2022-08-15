@@ -55,7 +55,8 @@ ul.front_selector_box {
   padding: 15px 15px 12px 10px;
   box-shadow: 0 2px 2px 0 #dad8d8;
   background-color: #fff;
-  margin-left: 10.40%;
+  position:absolute;
+  z-index:1;
 }
 
 li.front_selector_option {
@@ -98,16 +99,16 @@ button.front_selector_option_button {
 }
 
 .list_container {
-  margin-left: 10.40%;
+  margin-left: 8.4%;
   margin-top: 37px;
 }
 
-.list_element_container {
+.list_element {
   opacity: 0.8;
   border-radius: 6px;
   border: solid 1px #979797;
   background-color: #fff;
-  width: 40%;
+  width: 45%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -167,4 +168,15 @@ p.text_info {
 
 .info_container {
   margin-left: 3%;
+  width: 80%;
+}
+
+.list_element_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.list_element {
+  flex: 45%;
+  margin: 2%;
 }
