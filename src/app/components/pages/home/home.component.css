@@ -166,9 +166,11 @@ p.text_info {
   color: #6b6b6b;
 }
 
-.info_container {
+a {
+  cursor: default;
+  text-decoration: none;
   margin-left: 3%;
-  width: 80%;
+  width: 100%;
 }
 
 .list_element_container {
@@ -184,3 +186,4 @@ p.text_info {
 button.reaction_button {
   border: none;
 }
+

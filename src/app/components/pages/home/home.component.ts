@@ -9,7 +9,7 @@ import {NewsServicesService} from "../../../services/news-services.service";
 })
 export class HomeComponent implements OnInit {
   visibility: string = 'all';
-  dd_selected: any = {};
+  dd_selected: any;
   filter_exist: boolean = false;
   news_list: any[] = [];
   news_faves: any[] = [];
@@ -19,26 +19,19 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (window.localStorage.getItem('filter') !== null) {
+    if (JSON.parse(<string>window.localStorage.getItem('filter'))  !== null) {
       this.filter_exist = true;
       let str = JSON.parse(<string>localStorage.getItem("filter"));
       this.dd_selected = {
         icon: str.icon,
         name: str.name
       };
-    } else {
-      this.dd_selected = {
-        icon: '"./assets/icons/none-ico.jpg"',
-        name: 'Select your news'
-      };
     }
-    if (window.localStorage.getItem('my_faves') !== null){
+    if (JSON.parse(<string>window.localStorage.getItem('my_faves')) !== null) {
       this.news_faves = JSON.parse(<string>localStorage.getItem("my_faves"));
-    }else{
-      localStorage.setItem('my_faves', JSON.stringify([]));
+    } else {
       this.news_faves = [];
     }
-
     this.getNews(this.dd_selected.name, 0);
   }
 
@@ -104,13 +97,14 @@ export class HomeComponent implements OnInit {
   async getNews(language: string, page: number): Promise<void> {
     this.news_list = [];
     let news = await this.newsServices.getNews(language, page);
-
+    console.log(news.hits);
     news.hits.forEach((item: any) => {
       let time = this.xtimeAgo(new Date(item.created_at));
       let author = item.author;
       let info = item.story_title;
       let date_sort = new Date(item.created_at);
       let id = item.created_at;
+      let story_url = item.story_url;
       let reaction;
 
       if (this.isFaves(id) !== -1) {
@@ -126,6 +120,7 @@ export class HomeComponent implements OnInit {
         date_sort: date_sort,
         id: item.created_at,
         reaction: reaction,
+        story_url: story_url,
       })
     });
   }
@@ -161,24 +156,26 @@ export class HomeComponent implements OnInit {
   reactToNews(item: any): void {
 
     let index = this.news_list.findIndex(data => data.id == item.id);
+    if (this.isFaves(item.id) == -1) {
+      if(index!==-1)
+      this.news_list[index].reaction = "./assets/icons/reaction-active-ico.svg";
 
-  if ( this.isFaves(item.id) == -1) {
-    this.news_list[index].reaction = "./assets/icons/reaction-active-ico.svg";
-    item.reaction = "./assets/icons/reaction-active-ico.svg";
-    this.news_faves.push(item);
-    localStorage.setItem('filter', JSON.stringify(this.news_faves));
+      item.reaction = "./assets/icons/reaction-active-ico.svg";
+      this.news_faves.push(item);
+      localStorage.setItem('my_faves', JSON.stringify(this.news_faves));
     } else {
-    this.news_list[index].reaction = "./assets/icons/reaction-inactive-ico.svg";
-    this.news_faves.splice(this.isFaves(item.id),1);
-    localStorage.setItem('filter', JSON.stringify(this.news_faves));
-    }
+      if(index!==-1)
+      this.news_list[index].reaction = "./assets/icons/reaction-inactive-ico.svg";
 
+      this.news_faves.splice(this.isFaves(item.id), 1);
+      localStorage.setItem('my_faves', JSON.stringify(this.news_faves));
+    }
   }
 
-  isFaves(id: string): number{
+  isFaves(id: string): number {
     if (this.news_faves == null) {
       return -1;
-    } else{
+    } else {
       return this.news_faves.findIndex(item => item.id === id);
     }
   }
