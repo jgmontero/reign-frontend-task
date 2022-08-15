@@ -21,6 +21,9 @@ button.menu_btn {
   border-radius: 2px;
   border: solid 1px #d6d6d6;
 }
+button.menu_btn:hover{
+  opacity: 0.8;
+}
 
 p.menu_text {
   font-family: Roboto;
@@ -34,6 +37,11 @@ p.menu_text {
   border: solid 1px #1797ff !important;
   color: #1797ff;
 }
+
+.menu_btn_active:hover{
+  opacity: 0.8;
+}
+
 .selector_container {
   margin-left: 10.40%;
   margin-top: 63px;
@@ -63,6 +71,9 @@ li.front_selector_option {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+}
+li.front_selector_option:hover{
+  opacity: 0.8;
 }
 
 img.front_icon {
@@ -98,13 +109,19 @@ button.front_selector_option_button {
   align-items: center;
 }
 
+.front_selector_bar_button_container:hover{
+  opacity: 0.8;
+  border: solid 1px #1797ff !important;
+  color: #1797ff !important;
+}
+
 .list_container {
   margin-left: 8.4%;
   margin-top: 37px;
 }
 
 .list_element {
-  opacity: 0.8;
+  opacity: 1;
   border-radius: 6px;
   border: solid 1px #979797;
   background-color: #fff;
@@ -112,6 +129,11 @@ button.front_selector_option_button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex: 45%;
+  margin: 2%;
+}
+.list_element:hover{
+  opacity: 0.7;
 }
 
 .reaction_container {
@@ -177,10 +199,6 @@ a {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-}
-.list_element {
-  flex: 45%;
-  margin: 2%;
 }
 
 button.reaction_button {
