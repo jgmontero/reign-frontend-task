@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   filter_exist: boolean = false;
   news_list: any[] = [];
   news_faves: any[] = [];
+  news_pageAmount: number = 1;
 
   constructor(private newsServices: NewsServicesService) {
   }
@@ -32,6 +33,7 @@ export class HomeComponent implements OnInit {
     } else {
       this.news_faves = [];
     }
+    this.getPages();
     this.getNews(this.dd_selected.name, 0);
   }
 
@@ -178,5 +180,10 @@ export class HomeComponent implements OnInit {
     } else {
       return this.news_faves.findIndex(item => item.id === id);
     }
+  }
+
+  async getPages(){
+    let pages = await this.newsServices.getNewsPageAmount(this.dd_selected.name);
+    this.news_pageAmount = pages.nbPages;
   }
 }

@@ -17,4 +17,9 @@ export class NewsServicesService {
     return this.client.get<any[]>(url, this.httpOptions).toPromise().catch((err) => {
     });
   }
+  async getNewsPageAmount(language: string): Promise<any> {
+    const url = 'https://hn.algolia.com/api/v1/search_by_date?query=' + language;
+    return this.client.get<any[]>(url, this.httpOptions).toPromise().catch((err) => {
+    });
+  }
 }
