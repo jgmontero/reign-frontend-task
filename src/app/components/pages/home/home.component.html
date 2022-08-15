@@ -54,7 +54,9 @@
           </div>
           <div class="reaction_container">
             <div class="reaction_img_container">
-              <img class="reaction_img" src="./assets/icons/reaction-inactive-ico.svg">
+             <button (click)="reactToNews(item)" class="reaction_button">
+               <img class="reaction_img" src="{{item.reaction}}">
+             </button>
             </div>
           </div>
         </div>

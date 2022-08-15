@@ -180,3 +180,7 @@ p.text_info {
   flex: 45%;
   margin: 2%;
 }
+
+button.reaction_button {
+  border: none;
+}
