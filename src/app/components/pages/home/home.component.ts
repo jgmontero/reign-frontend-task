@@ -9,7 +9,7 @@ import {NewsServicesService} from "../../../services/news-services.service";
 })
 export class HomeComponent implements OnInit {
   visibility: string = 'all';
-  dd_selected: any;
+  dd_selected: any = null;
   filter_exist: boolean = false;
   news_list: any[] = [];
   news_faves: any[] = [];
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    window.localStorage.clear();
     if (JSON.parse(<string>window.localStorage.getItem('filter')) !== null) {
       this.filter_exist = true;
       let str = JSON.parse(<string>localStorage.getItem("filter"));
@@ -37,8 +37,11 @@ export class HomeComponent implements OnInit {
     }
     this.actual_page = 0;
 
-    this.getPages();
-    this.getNews(this.dd_selected.name, this.actual_page);
+    if(this.dd_selected!==null){
+      this.getPages();
+      this.getNews(this.dd_selected.name, this.actual_page);
+    }
+
     // @ts-ignore
     document.getElementById('btn-first').classList.toggle('pagination_btn_active');
   }
@@ -84,7 +87,8 @@ export class HomeComponent implements OnInit {
   }
 
   selectOption(event: any): void {
-
+    this.filter_exist = true;
+    this.getPages();
     let select = event.target.value.toLowerCase();
     let name = event.target.value
     this.dd_selected = {
@@ -99,14 +103,14 @@ export class HomeComponent implements OnInit {
     dd.style.display = 'none';
 
     this.getNews(name, 0);
-
+    this.getPages();
   }
 
   async getNews(language: string, page: number): Promise<void> {
     this.loading = true;
     this.news_list = [];
     let news = await this.newsServices.getNews(language, page);
-    console.log(news.hits);
+    //console.log(news.hits);
     news.hits.forEach((item: any) => {
       let time = this.xtimeAgo(new Date(item.created_at));
       let author = item.author;
