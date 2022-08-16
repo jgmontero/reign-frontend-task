@@ -4,6 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
+This app is able of manage notices from Hackers News. You may use language filters like Angular, Vuejs and Reactj. Fell free of select your favorites news and read them when you feel so. it also has a Angular-Material-like pagination. Feel free to wath it!!!
+
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
