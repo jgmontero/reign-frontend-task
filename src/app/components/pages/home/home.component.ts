@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (JSON.parse(<string>window.localStorage.getItem('filter'))  !== null) {
+    if (JSON.parse(<string>window.localStorage.getItem('filter')) !== null) {
       this.filter_exist = true;
       let str = JSON.parse(<string>localStorage.getItem("filter"));
       this.dd_selected = {
@@ -37,6 +37,8 @@ export class HomeComponent implements OnInit {
     this.actual_page = 0;
     this.getPages();
     this.getNews(this.dd_selected.name, this.actual_page);
+    // @ts-ignore
+    document.getElementById('btn-first').classList.toggle('pagination_btn_active');
   }
 
   toggleList(): void {
@@ -74,7 +76,7 @@ export class HomeComponent implements OnInit {
       // @ts-ignore
       dd.style.display = 'none';
       // @ts-ignore
-      event.target.classList.toggle('menu_btn_active')
+      event.target.classList.toggle('menu_btn_active');
     }
 
   }
@@ -116,7 +118,7 @@ export class HomeComponent implements OnInit {
       } else {
         reaction = "./assets/icons/reaction-inactive-ico.svg";
       }
-      if(item.author !==null &&  item.story_title !==null && item.story_url !==null && item.created_at!==null){
+      if (item.author !== null && item.story_title !== null && item.story_url !== null && item.created_at !== null) {
         this.news_list.push({
           time: time,
           author: author,
@@ -163,15 +165,15 @@ export class HomeComponent implements OnInit {
 
     let index = this.news_list.findIndex(data => data.id == item.id);
     if (this.isFaves(item.id) == -1) {
-      if(index!==-1)
-      this.news_list[index].reaction = "./assets/icons/reaction-active-ico.svg";
+      if (index !== -1)
+        this.news_list[index].reaction = "./assets/icons/reaction-active-ico.svg";
 
       item.reaction = "./assets/icons/reaction-active-ico.svg";
       this.news_faves.push(item);
       localStorage.setItem('my_faves', JSON.stringify(this.news_faves));
     } else {
-      if(index!==-1)
-      this.news_list[index].reaction = "./assets/icons/reaction-inactive-ico.svg";
+      if (index !== -1)
+        this.news_list[index].reaction = "./assets/icons/reaction-inactive-ico.svg";
 
       this.news_faves.splice(this.isFaves(item.id), 1);
       localStorage.setItem('my_faves', JSON.stringify(this.news_faves));
@@ -186,30 +188,83 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  async getPages(){
+  async getPages() {
     let pages = await this.newsServices.getNewsPageAmount(this.dd_selected.name);
     this.news_pageAmount = pages.nbPages;
   }
 
-  previousPage(): void{
-    if(this.actual_page > 0 ){
-      this.actual_page -=1;
+  previousPage(): void {
+    if (this.actual_page > 0) {
+      this.actual_page -= 1;
     }
-    this.getNews(this.dd_selected.name,this.actual_page);
-    console.log(this.actual_page);
+    this.getNews(this.dd_selected.name, this.actual_page);
+    this.artificialMaterial();
   }
 
-  nextPage(): void{
-    if(this.actual_page < this.news_pageAmount - 1 ){
+  nextPage(): void {
+    if (this.actual_page < this.news_pageAmount - 1) {
       this.actual_page += 1;
     }
-    this.getNews(this.dd_selected.name,this.actual_page);
-    console.log(this.actual_page)
+    this.getNews(this.dd_selected.name, this.actual_page);
+    this.artificialMaterial();
   }
 
-  gotoPage(page: number):void{
-    this.actual_page = page - 1;
-    this.getNews(this.dd_selected.name,this.actual_page);
-    console.log(this.actual_page)
+  gotoPage(event: any): void {
+    this.actual_page = <number>event.target.innerText - 1;
+    this.getNews(this.dd_selected.name, this.actual_page);
+    this.artificialMaterial();
+  }
+
+  artificialMaterial() {
+    this.setPaginationText();
+    this.activePaginationButton();
+  }
+
+  activePaginationButton(): void {
+    let collection = Array.from(document.getElementsByClassName('pagination_button'));
+    collection.forEach((item: any) => {
+      item.classList.remove('pagination_btn_active');
+      if (item.innerText == this.actual_page + 1) {
+        item.classList.add('pagination_btn_active');
+      }
+    });
+  }
+
+  setPaginationText(): void {
+    if (this.actual_page < 4) {
+      // @ts-ignore
+      document.getElementById('btn-second').textContent = '2';
+      // @ts-ignore
+      document.getElementById('btn-third').textContent = '3';
+      // @ts-ignore
+      document.getElementById('btn-fourth').textContent = '4';
+      // @ts-ignore
+      document.getElementById('btn-fift').textContent = '5';
+
+    } else if (this.actual_page >= 4 && this.actual_page < (this.news_pageAmount - 1) - 3) {
+      // @ts-ignore
+      document.getElementById('btn-second').textContent = '...';
+      // @ts-ignore
+      document.getElementById('btn-sixth').textContent = '...';
+      // @ts-ignore
+      document.getElementById('btn-third').textContent = (this.actual_page).toString();
+      // @ts-ignore
+      document.getElementById('btn-fourth').textContent = (this.actual_page + 1).toString();
+      // @ts-ignore
+      document.getElementById('btn-fourth').classList.add('pagination_btn_active');
+      // @ts-ignore
+      document.getElementById('btn-fift').textContent = (this.actual_page + 2).toString();
+    } else {
+      // @ts-ignore
+      document.getElementById('btn-second').textContent = '...';
+      // @ts-ignore
+      document.getElementById('btn-third').textContent = this.news_pageAmount - 4;
+      // @ts-ignore
+      document.getElementById('btn-fourth').textContent = this.news_pageAmount - 3;
+      // @ts-ignore
+      document.getElementById('btn-fift').textContent = this.news_pageAmount - 2;
+      // @ts-ignore
+      document.getElementById('btn-sixth').textContent = this.news_pageAmount - 1;
+    }
   }
 }

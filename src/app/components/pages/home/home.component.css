@@ -139,7 +139,7 @@ button.front_selector_option_button {
   transition: opacity linear .5s;
 }
 .list_element:hover{
-  opacity: 0.7;
+  opacity: 0.4;
 }
 
 .reaction_container {
@@ -214,5 +214,20 @@ button.reaction_button {
 .pagination_container {
   display: flex;
   justify-content: center;
+  margin-bottom: 5%;
 }
 
+button.pagination_button {
+  width: 32px;
+  height: 32px;
+  margin: 0 8px;
+  border-radius: 50px;
+  border: solid 1px #d9d9d9;
+  background-color: #fff;
+  transition: linear .3s;
+}
+
+button.pagination_btn_active{
+  border: solid 1px #ea2d2d !important;
+  background-color: #ea2d2d;
+}
