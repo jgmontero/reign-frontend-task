@@ -71,7 +71,7 @@
 
     </div>
     <div *ngIf="visibility=='faves'" class="list_my_faves">
-      <div class="list_element_container">
+      <div *ngIf="news_faves.length > 0" class="list_element_container">
         <div class="list_element" *ngFor="let item of news_faves">
           <a href="{{item.story_url}}">
             <div class="info_container">
@@ -93,6 +93,9 @@
           </div>
         </div>
 
+      </div>
+      <div *ngIf="news_faves.length == 0" class="no_faves_yet_container">
+        <img class="not_faves_yet_img" src="./assets/img/no_faves_yet.png">
       </div>
     </div>
   </div>

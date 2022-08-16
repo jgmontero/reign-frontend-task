@@ -249,6 +249,15 @@ img.loading_gif {
   max-width: 46%;
 }
 
+img.not_faves_yet_img {
+  width: 90%;
+  margin: 2%;
+}
+.no_faves_yet_container {
+  display: flex;
+  justify-content: center;
+}
+
 @media (max-width: 850px) {
 
   .list_element {
