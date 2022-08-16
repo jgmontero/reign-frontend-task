@@ -13,8 +13,9 @@ export class HomeComponent implements OnInit {
   filter_exist: boolean = false;
   news_list: any[] = [];
   news_faves: any[] = [];
-  news_pageAmount: number = 1;
+  news_pageAmount: any = "N";
   actual_page: number = 0;
+  loading: boolean = false;
 
   constructor(private newsServices: NewsServicesService) {
   }
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit {
       this.news_faves = [];
     }
     this.actual_page = 0;
+
     this.getPages();
     this.getNews(this.dd_selected.name, this.actual_page);
     // @ts-ignore
@@ -101,6 +103,7 @@ export class HomeComponent implements OnInit {
   }
 
   async getNews(language: string, page: number): Promise<void> {
+    this.loading = true;
     this.news_list = [];
     let news = await this.newsServices.getNews(language, page);
     console.log(news.hits);
@@ -131,6 +134,7 @@ export class HomeComponent implements OnInit {
       }
 
     });
+    this.loading = false
   }
 
   xtimeAgo(pastDate: Date): string {

@@ -38,8 +38,12 @@
       </ul>
     </div>
   </div>
-  <div class="list_container">
 
+  <div *ngIf="loading" class="loading_gif_container">
+    <img class="loading_gif" src="./assets/icons/loading-ico.gif">
+  </div>
+
+  <div *ngIf="!loading" class="list_container">
     <div *ngIf="visibility=='all'" class="list_all">
       <div class="list_element_container">
         <div class="list_element" *ngFor="let item of news_list">

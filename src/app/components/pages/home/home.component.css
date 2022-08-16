@@ -226,8 +226,21 @@ button.pagination_button {
   background-color: #fff;
   transition: linear .3s;
 }
+button.pagination_button:hover{
+  border: solid 1px #ea2d2d;
+}
 
 button.pagination_btn_active{
   border: solid 1px #ea2d2d !important;
   background-color: #ea2d2d;
+}
+
+.loading_gif_container {
+  display: flex;
+  justify-content: center;
+  margin: 5%;
+}
+
+img.loading_gif {
+  width: 50%;
 }
