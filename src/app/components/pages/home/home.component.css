@@ -244,3 +244,54 @@ button.pagination_btn_active{
 img.loading_gif {
   width: 50%;
 }
+
+.list_element {
+  max-width: 46%;
+}
+
+@media (max-width: 850px) {
+
+  .list_element {
+    max-width: 90%;
+    width: 85%;
+  }
+  section.header_section {
+    justify-content: center;
+  }
+  .banner_img_container {
+    margin-left:0%;
+  }
+  .selector_container {
+    margin-left: 0%;
+    margin-top: 63px;
+  }
+  .front_selector {
+    display: flex;
+    justify-content: center;
+  }
+
+  .list_element_container {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (max-width: 650px) {
+  .list_container {
+    margin-left: 0%;
+    margin-top: 37px;
+  }
+}
+
+@media (max-width: 450px) {
+  span.date {
+    font-size: 10px;
+  }
+  p.text_info {
+    font-size: 12px;
+  }
+  button.pagination_button {
+    margin: 0px;
+  }
+}
