@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/pages/home/home.component';
-
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 @NgModule({
   declarations: [
     AppComponent,
@@ -13,7 +13,8 @@ import { HomeComponent } from './components/pages/home/home.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpClientTestingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
